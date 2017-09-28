@@ -27,8 +27,8 @@ export default {
   name: 'loginView',
   data() {
     return {
-    loginID:'',
-    password:''
+    loginID:'2trade141',
+    password:'12345678'
     }
   },
   created(){
@@ -45,13 +45,11 @@ export default {
         method:'post',
         baseURL: Config.server,
         headers:{
-          'Access-Control-Allow-Origin':'*',
-          'Access-Control-Allow-Headers': 'Content-Type',
-          'Accept': 'application/json',
-          'Content-Type': 'application/x-www-form-urlencoded',
           'BrokerID':'MR',
           'Version':'1.0',
-          'uuid':'uuid'
+          'uuid':'uuid',
+          'Appkey':'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOiJHb1RyYWRlIiwidHlwZSI6IkludGVybmFsIiwiYXBwSWQiOiJHb01vYmlsZSIsImFsbG93U2VydmljZSI6WyJDRyIsIlBTRyJdLCJleHBpcmVzSW4iOiIyMDUwMTIzMSJ9.IJjUqqofGgjd7qNG0PCAnX8K7xBTwGoGAyxXbLcMDt8',
+          'AppPwd':'abcd1234'
         },
         data:{
           password:password,
@@ -59,7 +57,7 @@ export default {
         }
        }).then(function(response) {
          console.log(response.data);
-         router.push('main');
+         // router.push('main');
        });
     }
   }

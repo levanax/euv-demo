@@ -33,7 +33,7 @@ router.beforeEach((to, from, next) => {
   			next();
 		break;
 		default:
-			console.debug('to.path : '+to.path);
+			// console.debug('to.path : '+to.path);
 			if(online){
 				next();
 			}else{
