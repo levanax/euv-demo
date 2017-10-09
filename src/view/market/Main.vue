@@ -1,64 +1,138 @@
 <template>
 	<div class="mainView">
+
+        <table class="table">
+		  <thead class="thead-inverse">
+		    <tr>
+		      <th>Code</th>
+		      <th>Value</th>
+		      <th>change</th>
+		      <th> </th>
+		    </tr>
+		  </thead>
+		  <tbody>
+		    <tr v-for="index in indexs" v-show="index.Val !== 0">
+		      <th>{{index.Code}}</th>
+		      <td>{{index.Val}}</td>
+		      <td v-bind:class='{red:index.Chg>0, green:index.Chg<0}'>{{index.Chg>0?'+'+index.Chg:index.Chg}}</td>
+		      <td><!-- {{index.Chg/index.Val}} --></td>
+		    </tr>
+		  </tbody>
+		</table>
+
 		<div class="input-group">
-	      <input v-model="securityCode" type="text" class="form-control" placeholder="Search for..." aria-label="Search for...">
+	      <input v-model="securityCode" type="text" class="form-control" placeholder="" >
 	      <span class="input-group-btn">
 	        <button v-on:click="search()" class="btn btn-secondary" type="button">Search</button>
 	      </span>
-      </div>
+        </div>
 
-      <table class="table">
-	  <thead class="thead-inverse">
-	    <tr>
-	      <th>#</th>
-	      <th></th>
-	      <th>Bid</th>
-	      <th>Ask</th>
-	    </tr>
-	  </thead>
-	  <tbody>
-	    <tr>
-	      <th scope="row">11</th>
-	      <td></td>
-	      <td></td>
-	      <td></td>
-	    </tr>
-	    <tr>
-	      <th scope="row">2</th>
-	      <td></td>
-	      <td></td>
-	      <td></td>
-	    </tr>
-	    <tr>
-	      <th scope="row">3</th>
-	      <td></td>
-	      <td></td>
-	      <td></td>
-	    </tr>
-	  </tbody>
-	</table>
+        <table class="quoteTable">
+        	<tr>
+        		<th>code</th>
+        		<td>{{securityQuoteInfo.SctyID}}</td>
+        		<th>name</th>
+        		<td colspan="5">
+        			<b-button size="sm" v-on:click="buy()" variant="success">Buy</b-button>
+        		</td>
+        	</tr>
+        	<tr>
+        		<th>现价</th>
+        		<td>{{securityQuoteInfo.Nom}}</td>
+        		<th>涨/跌幅</th>
+        		<td  v-bind:class='{red:securityQuoteInfo.Chg>0, green:securityQuoteInfo.Chg<0}'>{{securityQuoteInfo.Chg>0?'+'+securityQuoteInfo.Chg:securityQuoteInfo.Chg}}</td>
+        		<th>最高价</th>
+        		<td>{{securityQuoteInfo.Hi}}</td>
+        		<th>最低价</th>
+        		<td>{{securityQuoteInfo.Lo}}</td>
+        	</tr>
+        </table>
     </div>
 </template>
 <script type="text/javascript">
-	import router from '@/router/Router';
 	import * as socketManager from '@/service/socketManager';
 
 	export default {
 		name:'mainView',
-		beforeCreate(){
-			// console.log(this)
-         	// router.push('/login');
+		props:{
+			test: {
+				type: Boolean,
+				default: false
+			}
+		},
+		created(){
+			this.initView();
+		},
+		computed:{
+		},
+		components:{
+			'levan': {
+				template: 'this is levan.'
+
+			}
 		},
 		data(){
 			return {
-				securityCode:''
+				securityCode:'',
+				indexs:[],
+				securityQuoteInfo: {}
 			}
 		},
 		methods: {
+			initView: function(){
+				var me = this;
+				var authorization = sessionStorage.getItem('authorization');
+				socketManager.install({
+					authorization: authorization,
+					brokerID: 'MR'
+				});
+				socketManager.addIndexResponseListener(function(data){
+					me.indexs = data.Index;
+				});
+				socketManager.subscribeIndex();
+
+
+				socketManager.addResponseListener(function(data){
+					console.log(data);
+					me.securityQuoteInfo = data;
+				});
+
+			},
 			search: function() {
 				let securityCode = this.securityCode;
-				socketManager.init();
+				// this.$parent.$emit('test','this is msg.');
+				// let test1 = function(v){
+				// 	return v;
+				// }
+				// let test2 = {...test1([1,2,3,4,5]), 0:'asdfasdf'};
+				// console.log(test2);
+				socketManager.subscribe({
+					mktCode: 'HK',
+					sctyID: securityCode
+				});
+			},
+			buy: function(){
+				console.debug('in buy()... ');
 			}
 		}
 	}
 </script>
+
+<style lang="scss">
+.quoteTable {
+	th {
+		font-weight:normal;
+		min-width: 4em;
+	}
+	td{
+		min-width: 5em;
+		text-align:left;
+	}
+}
+.red{
+	color:red;
+}
+.green{
+	color:green;
+}
+</style>

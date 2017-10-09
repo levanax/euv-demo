@@ -21,24 +21,23 @@
 <script>
 import {Config} from '@/commons/Config'
 import axios from 'axios';
-import router from '@/router/Router'
 
 export default {
   name: 'loginView',
   data() {
     return {
-    loginID:'2trade141',
+    loginID:'2trade140',
     password:'12345678'
     }
   },
   created(){
-    console.log('in created() ... ');
+    // console.log('in created() ... ');
   },
   methods:{
     login(){
+      var me = this;
        var loginID = this.loginID;
        var password = this.password;
-       console.log(loginID,password, 'you click btn ..');
        var url = '/clients/'+loginID+'/session';
        axios.request({
         url: url,
@@ -48,16 +47,27 @@ export default {
           'BrokerID':'MR',
           'Version':'1.0',
           'uuid':'uuid',
-          'Appkey':'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOiJHb1RyYWRlIiwidHlwZSI6IkludGVybmFsIiwiYXBwSWQiOiJHb01vYmlsZSIsImFsbG93U2VydmljZSI6WyJDRyIsIlBTRyJdLCJleHBpcmVzSW4iOiIyMDUwMTIzMSJ9.IJjUqqofGgjd7qNG0PCAnX8K7xBTwGoGAyxXbLcMDt8',
-          'AppPwd':'abcd1234'
+          'Appkey': Config.appkey,
+          'AppPwd': Config.appPwd
         },
         data:{
           password:password,
           ordChnl:'W'
         }
        }).then(function(response) {
-         console.log(response.data);
-         // router.push('main');
+         let data = response.data;
+         if('S' === data.status){
+          var authorization = response.headers.authorization;
+          sessionStorage.setItem('authorization', authorization);
+          axios.defaults.headers.common['authorization'] = authorization;
+          axios.defaults.headers.common['BrokerID'] = 'MR';
+          axios.defaults.headers.common['Appkey'] = Config.appkey;
+          axios.defaults.headers.common['AppPwd'] = Config.appPwd;
+
+          me.$router.push('main');
+         }else{
+          console.warn('user or password error.');
+         }
        });
     }
   }

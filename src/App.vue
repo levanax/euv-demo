@@ -1,12 +1,21 @@
 <template>
-  <div id="app">
-    <router-view></router-view>
-  </div>
+  <b-container fluid>
+    <div id="app">
+      <router-view></router-view>
+    </div>
+  </b-container>
 </template>
 
 <script>
 export default {
-  name: 'app'
+  name: 'app',
+  created(){
+    console.log('in app.vue .');
+
+    this.$on('test', function(data){
+      console.log(data);
+    });
+  }
 }
 </script>
 
