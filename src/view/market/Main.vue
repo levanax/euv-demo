@@ -87,13 +87,14 @@
 					brokerID: 'MR'
 				});
 				socketManager.addIndexResponseListener(function(data){
+					// console.log(data);
 					me.indexs = data.Index;
 				});
 				socketManager.subscribeIndex();
 
 
 				socketManager.addResponseListener(function(data){
-					console.log(data);
+					// console.log(data);
 					me.securityQuoteInfo = data;
 				});
 
@@ -112,7 +113,18 @@
 				});
 			},
 			buy: function(){
-				console.debug('in buy()... ');
+				let market = 'HK';
+				let sctyID = this.securityQuoteInfo.SctyID;
+				if(sctyID){
+					let url = [
+							'order',
+							market,
+							sctyID,
+							'buy'
+						].join('/');
+	          		this.$router.push(url);
+				}
+
 			}
 		}
 	}

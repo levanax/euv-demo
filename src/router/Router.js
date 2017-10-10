@@ -1,7 +1,9 @@
-import Vue from 'vue'
-import Router from 'vue-router'
-import UserLogin from '@/view/user/Login'
-import Main from '@/view/market/Main'
+import Vue from 'vue';
+import Router from 'vue-router';
+
+const UserLogin = () => import('@/view/user/Login');
+const Main = () => import('@/view/market/Main');
+const Order = () => import('@/view/market/Order');
 
 Vue.use(Router);
 
@@ -22,6 +24,10 @@ let router = new Router({
 		beforeEnter : function(to, from, next){
 			next();
 		}
+	}, {
+		path: '/order/:market/:sctyID/:side',
+		name: 'order',
+		component: Order
 	}]
 });
 
