@@ -33,17 +33,20 @@
 	      }
 	    },
 	    created(){
-	    	console.debug(this.$route.params)
+	    	// console.debug(this.$route.params);
+	        var loginID = this.$store.state.session.loginID;
+	    	this.$store.dispatch('account/QUERY_ACCOUNT_LIST', {loginID: loginID}).then((res)=>{
+	          	console.debug(res)
+	        })
 	    },
 		methods: {
 			onSubmit(evt) {
 	          evt.preventDefault();
 	          // console.debug(JSON.stringify(this.form));
 	          
-	          var loginID = this.$store.state.loginID;
-	          this.$store.dispatch('QUERY_ACCOUNT_LIST', {loginID: loginID}).then(()=>{
-	          	
-	          })
+	          var loginID = this.$store.state.session.loginID;
+	          console.debug(this.$store.state.account.accountList);
+	          
 	        }
 		}
 	}

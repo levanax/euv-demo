@@ -10,8 +10,6 @@ export function queryAccountList(loginID) {
 		url: url,
 		method: 'get',
 		baseURL: Config.server,
-		data: {
-
-		}
+		data: {}
 	});
 }

@@ -59,7 +59,7 @@ export default {
            if('S' === data.status){
             var authorization = response.headers.authorization;
 
-            this.$store.commit('SET_USER_CACHE', {loginID:loginID, authorization:authorization});
+            this.$store.commit('session/SET_USER_CACHE', {loginID:loginID, authorization:authorization});
 
             axios.defaults.headers.common['authorization'] = authorization;
             axios.defaults.headers.common['BrokerID'] = 'MR';

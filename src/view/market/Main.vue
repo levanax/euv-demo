@@ -81,7 +81,7 @@
 		methods: {
 			initView: function(){
 				var me = this;
-				var authorization = this.$store.state.authorization;
+				var authorization = this.$store.state.session.authorization;
 				socketManager.install({
 					authorization: authorization,
 					brokerID: 'MR'
