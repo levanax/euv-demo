@@ -24,11 +24,11 @@
 	      return {
 	      	form: {
 		        name: '',
-		        food: null,
+		        food: null
 		      },
 		      foods: [
 		        { text:'Select One', value:null },
-		        '1','2','3','4'
+		        '1','2','3','4','test00000'
 		      ]
 	      }
 	    },
@@ -38,7 +38,12 @@
 		methods: {
 			onSubmit(evt) {
 	          evt.preventDefault();
-	          alert(JSON.stringify(this.form));
+	          // console.debug(JSON.stringify(this.form));
+	          
+	          var loginID = this.$store.state.loginID;
+	          this.$store.dispatch('QUERY_ACCOUNT_LIST', {loginID: loginID}).then(()=>{
+	          	
+	          })
 	        }
 		}
 	}

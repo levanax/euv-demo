@@ -81,7 +81,7 @@
 		methods: {
 			initView: function(){
 				var me = this;
-				var authorization = sessionStorage.getItem('authorization');
+				var authorization = this.$store.state.authorization;
 				socketManager.install({
 					authorization: authorization,
 					brokerID: 'MR'

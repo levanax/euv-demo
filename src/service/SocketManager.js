@@ -2,7 +2,7 @@ import io from 'socket.io-client';
 import axios from 'axios';
 import {
 	Config
-} from '@/commons/Config';
+} from '@/commons/config';
 
 let feedSocket;
 /**

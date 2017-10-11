@@ -19,7 +19,7 @@
 </template>
 
 <script>
-import {Config} from '@/commons/Config'
+import {Config} from '@/commons/config'
 import axios from 'axios';
 
 export default {
@@ -54,20 +54,24 @@ export default {
           password:password,
           ordChnl:'W'
         }
-       }).then(function(response) {
-         let data = response.data;
-         if('S' === data.status){
-          var authorization = response.headers.authorization;
-          sessionStorage.setItem('authorization', authorization);
-          axios.defaults.headers.common['authorization'] = authorization;
-          axios.defaults.headers.common['BrokerID'] = 'MR';
-          axios.defaults.headers.common['Appkey'] = Config.appkey;
-          axios.defaults.headers.common['AppPwd'] = Config.appPwd;
+       }).then( (response) => {
+          let data = response.data;
+           if('S' === data.status){
+            var authorization = response.headers.authorization;
 
-          me.$router.push('main');
-         }else{
-          console.warn('user or password error.');
-         }
+            this.$store.commit('SET_USER_CACHE', {loginID:loginID, authorization:authorization});
+
+            axios.defaults.headers.common['authorization'] = authorization;
+            axios.defaults.headers.common['BrokerID'] = 'MR';
+            axios.defaults.headers.common['uuid'] = 'uuid';
+            
+            axios.defaults.headers.common['Appkey'] = Config.appkey;
+            axios.defaults.headers.common['AppPwd'] = Config.appPwd;
+
+            this.$router.push('main');
+           }else{
+            console.warn('user or password error.');
+           }
        });
     }
   }
