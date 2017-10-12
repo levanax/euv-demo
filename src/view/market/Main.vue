@@ -111,6 +111,12 @@
 					mktCode: 'HK',
 					sctyID: securityCode
 				});
+				this.$store.dispatch('market/QUERY_SECURITY_STATIC_DATA', {
+					marketCode: 'HK',
+					securityCode: securityCode
+				}).then((data) => {
+					console.debug(data);
+				});
 			},
 			buy: function(){
 				let market = 'HK';

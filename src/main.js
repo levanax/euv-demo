@@ -4,6 +4,7 @@ import Vue from 'vue'
 import App from './App'
 import {Config} from './commons/config'
 import * as axiosManager from './utils/axiosManager'
+import * as filters from './utils/filters'
 import router from './router'
 import store from './store'
 
@@ -11,7 +12,9 @@ import BootstrapVue from 'bootstrap-vue'
 import 'bootstrap/dist/css/bootstrap.css'
 import 'bootstrap-vue/dist/bootstrap-vue.css'
 
-
+Object.keys(filters).forEach(key => {
+  Vue.filter(key, filters[key])
+})
 
 Vue.config.devtools = true;
 Vue.config.productionTip = false;
