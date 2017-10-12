@@ -14,8 +14,8 @@ export default {
 				marketApi.querySecurityStaticData(marketCode, securityCode).then((response) => {
 				  let data = response.data;
 				  if(!data.error && !data.sysCode){
-				  	commit('PUSH_SECURITY_MAP', {security: data});
-				  	resolve(data);
+				  	commit('PUSH_SECURITY_MAP', {security: data.security});
+				  	resolve(data.security);
 				  }else{
 				  	console.warn('request fail.');
 				  	reject('request fail');
@@ -34,7 +34,10 @@ export default {
 	},
 	mutations: {
 		'PUSH_SECURITY_MAP': (state, {security}) => {
-			let key = security.mktCode + security.mktCode;
+			if(!security.mktCode){
+				throw new Error('PUSH_SECURITY_MAP: security is error data');
+			}
+			let key = security.mktCode + security.sctyID;
 			state.securityMap.set(key, security);
 		},
 		'SET_MARKET_CURRENCY_MAP': (state, {marketCurrencyList}) => {
@@ -44,8 +47,11 @@ export default {
 		}
 	},
 	getters: {
-		'GET_SECURITY_MAP': (dispatch, state, getters) => {
-			return state.securityMap;
+		'GET_SECURITY': (state, getters) => {
+			return (marketCode, securityCode) => {
+				let key = marketCode + securityCode;
+				return state.securityMap.get(key);
+			};
 		}
 	}
 }

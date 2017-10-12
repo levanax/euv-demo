@@ -47,7 +47,6 @@
         		<td>{{securityQuoteInfo.Lo}}</td>
         	</tr>
         </table>
-        {{security}}
     </div>
 </template>
 <script type="text/javascript">
@@ -66,20 +65,6 @@
 			this.initView();
 		},
 		computed:{
-			...mapState({
-				security: state => {
-					let result = '';
-					console.debug('hi  see me',this.securityQuoteInfo);
-					if(this.securityQuoteInfo){
-						let key = this.securityQuoteInfo.mktCode + this.securityQuoteInfo.sctyID;
-						console.log(key);
-						if(state.market.securityMap.has(key)){
-							result = state.market.securityMap.get(key);
-						}
-					}
-					return result;
-				}
-			})
 		},
 		components:{
 		},
@@ -127,7 +112,8 @@
 					marketCode: 'HK',
 					securityCode: securityCode
 				}).then((data) => {
-					console.debug(data);
+					let res = this.$store.getters['market/GET_SECURITY']('HK', securityCode);
+					console.debug(res);
 				});
 			},
 			buy: function(){
@@ -142,7 +128,6 @@
 						].join('/');
 	          		this.$router.push(url);
 				}
-
 			}
 		}
 	}

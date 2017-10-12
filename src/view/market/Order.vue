@@ -67,7 +67,7 @@
 					marketCode: 'HK',
 					securityCode: this.$route.params.sctyID
 				}).then((data) => {
-					this.security = data.security;
+					this.security = data;
 				});
 	    },
 		methods: {
