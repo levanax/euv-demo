@@ -47,10 +47,12 @@
         		<td>{{securityQuoteInfo.Lo}}</td>
         	</tr>
         </table>
+        {{security}}
     </div>
 </template>
 <script type="text/javascript">
 	import * as socketManager from '@/service/socketManager';
+	import { mapState, mapGetters } from 'vuex';
 
 	export default {
 		name:'mainView',
@@ -64,12 +66,22 @@
 			this.initView();
 		},
 		computed:{
+			...mapState({
+				security: state => {
+					let result = '';
+					console.debug('hi  see me',this.securityQuoteInfo);
+					if(this.securityQuoteInfo){
+						let key = this.securityQuoteInfo.mktCode + this.securityQuoteInfo.sctyID;
+						console.log(key);
+						if(state.market.securityMap.has(key)){
+							result = state.market.securityMap.get(key);
+						}
+					}
+					return result;
+				}
+			})
 		},
 		components:{
-			'levan': {
-				template: 'this is levan.'
-
-			}
 		},
 		data(){
 			return {

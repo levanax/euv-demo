@@ -7,8 +7,8 @@ export default {
   		accountList:[]
 	},
 	actions: {
-		'QUERY_ACCOUNT_LIST': ({commit, state}, {loginID}) => {
-			accountApi.queryAccountList(loginID).then(function(response) {
+		'QUERY_ACCOUNT_LIST': async ({commit, state}, {loginID}) => {
+			await accountApi.queryAccountList(loginID).then(function(response) {
 			  let data = response.data;
 		      if(data.clientAccounts){
 		      	commit('SET_ACCOUNT_LIST', {accountList: data.clientAccounts});

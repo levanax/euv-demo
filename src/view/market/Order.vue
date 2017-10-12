@@ -15,7 +15,7 @@
 
 			<div class="l-form-row">
 				<div class="l-label">股票名</div>
-				<div class="l-value">&nbsp;</div>
+				<div class="l-value">{{security.sctyName}}</div>
 			</div>
 
 			<br/>
@@ -35,11 +35,15 @@
 	</div>
 </template>
 <script type="text/javascript">
+	import {mapActions } from 'vuex';
 	export default{
 		name: 'orderView',
 		data(){
 	      return {
 	      	form: {
+		    },
+		    security: {
+
 		    }
 	      }
 	    },
@@ -54,9 +58,22 @@
 	    created(){
 	    	// console.debug(this.$route.params);
 	        var loginID = this.$store.state.session.loginID;
-	    	this.$store.dispatch('account/QUERY_ACCOUNT_LIST', {loginID: loginID});
+	    	this.$store.dispatch('account/QUERY_ACCOUNT_LIST', {loginID: loginID}).then(() => {
+	    		console.debug('get account list done.');
+	    	});
+	    	// this.$store.dispatch('market/QUERY_MARKET_CURRENCY');
+	    	this.loadMarketCurrency();
+	    	this.$store.dispatch('market/QUERY_SECURITY_STATIC_DATA', {
+					marketCode: 'HK',
+					securityCode: this.$route.params.sctyID
+				}).then((data) => {
+					this.security = data.security;
+				});
 	    },
 		methods: {
+			...mapActions({
+				'loadMarketCurrency':'market/QUERY_MARKET_CURRENCY'
+			}),
 			onSubmit(evt) {
 	          evt.preventDefault();
 	          console.debug(JSON.stringify(this.form));
