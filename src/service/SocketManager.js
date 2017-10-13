@@ -11,30 +11,36 @@ let feedSocket;
  * @param data.authorization {String}
  */
 let createSocketConnect = function(data) {
-	let [url, authorization, brokerID] = [Config.psgServer, data.authorization, data.brokerID];
+	if(!feedSocket){
+		let [url, authorization, brokerID] = [Config.psgServer, data.authorization, data.brokerID];
 
-	feedSocket = io.connect(url, {
-		reconnectionAttempts: 0,
-		timeout: 2000,
-		reconnectionDelay: 100,
-		reconnectionDelayMax: 200,
-		autoConnect: true,
-		multiplex: false,
-		query: [
-			'authorization=' + authorization,
-			'uuid=' + 'uuid',
-			'brokerID=' + brokerID,
-			'Appkey=' + Config.appKey,
-			'AppPwd=' + Config.appPwd
-		].join('&')
-	});
+		feedSocket = io.connect(url, {
+			reconnectionAttempts: 0,
+			timeout: 2000,
+			reconnectionDelay: 100,
+			reconnectionDelayMax: 200,
+			autoConnect: true,
+			multiplex: false,
+			query: [
+				'authorization=' + authorization,
+				'uuid=' + 'uuid',
+				'brokerID=' + brokerID,
+				'Appkey=' + Config.appKey,
+				'AppPwd=' + Config.appPwd
+			].join('&')
+		});
 
-	feedSocket.on('connect', function() {
-		console.debug('connected.');
-	});
-	feedSocket.on('disconnect', function() {
-		console.debug('disconnected');
-	});
+		feedSocket.on('connect', function() {
+			console.debug('connected.');
+		});
+		feedSocket.on('disconnect', function() {
+			console.debug('disconnected');
+		});
+	}else{
+		if (!feedSocket.connected) {
+			feedSocket.connect();		
+		}
+	}
 }
 
 /**
@@ -74,7 +80,7 @@ let subscribeIndex = function() {
 			}
 		}).then(function(response) {
 			let data = response.data;
-			console.debug(data);
+			// console.debug(data);
 		});
 	}else{
 		setTimeout(function(){
@@ -95,8 +101,6 @@ let addIndexResponseListener = function(callback) {
 
 
 let install = function(data) {
-
-	console.log('init socket connect ... ');
 	createSocketConnect(data);
 }
 

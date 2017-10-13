@@ -21,7 +21,7 @@
 		</table>
 
 		<div class="input-group">
-	      <input v-model="securityCode" type="text" class="form-control" placeholder="" >
+	      <input v-model="securityCode" @change="formatSecurityCode($event.target.value, $event)"  type="text" class="form-control" placeholder="" >
 	      <span class="input-group-btn">
 	        <button v-on:click="search()" class="btn btn-secondary" type="button">Search</button>
 	      </span>
@@ -33,6 +33,7 @@
         		<td>{{securityQuoteInfo.SctyID}}</td>
         		<th>name</th>
         		<td colspan="5">
+        			{{security.sctyName}}&nbsp;
         			<b-button size="sm" v-on:click="buy()" variant="success">Buy</b-button>
         		</td>
         	</tr>
@@ -72,7 +73,13 @@
 			return {
 				securityCode:'',
 				indexs:[],
-				securityQuoteInfo: {}
+				securityQuoteInfo: {},
+				security:{}
+			}
+		},
+		watch: {
+			securityCode(newVal, oldVal){
+				// console.debug('in securityCode()...', arguments);
 			}
 		},
 		methods: {
@@ -113,8 +120,21 @@
 					securityCode: securityCode
 				}).then((data) => {
 					let res = this.$store.getters['market/GET_SECURITY']('HK', securityCode);
-					console.debug(res);
+					this.security = res;
 				});
+			},
+			formatSecurityCode: function(value, event){
+				let securityCode = value.trim().replace(/[^0-9 ]/g, '');
+				if(securityCode!== '' && parseInt(securityCode, 10) >0){
+					let length = securityCode.length;
+					let str = '';
+					for(let i = 0 ,l = 5 - length; i < l ; i++){
+						str += '0';
+					}
+					this.securityCode = str + securityCode;
+				}else{
+					this.securityCode = '';
+				}
 			},
 			buy: function(){
 				let market = 'HK';

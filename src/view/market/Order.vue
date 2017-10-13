@@ -15,7 +15,7 @@
 
 			<div class="l-form-row">
 				<div class="l-label">股票名</div>
-				<div class="l-value">{{security.sctyName}}</div>
+				<div class="l-value">{{security.sctyName}}&nbsp;</div>
 			</div>
 
 			<br/>
