@@ -2,7 +2,7 @@
 	<div class="quoteComponent">
 
 		<div class="input-group">
-	      <input v-model="securityCode" @change="formatSecurityCode($event.target.value, $event)"  type="text" class="form-control" placeholder="" >
+	      <input maxlength="5" v-model="securityCode" @change="formatSecurityCode($event.target.value, $event)"  type="text" class="form-control" placeholder="" >
 	      <span class="input-group-btn">
 	        <button v-on:click="search()" class="btn btn-secondary" type="button">Search</button>
 	      </span>
@@ -10,11 +10,11 @@
 
 		<table class="quoteTable">
         	<tr>
-        		<th>code</th>
-        		<td>{{securityQuoteInfo.SctyID}}</td>
-        		<th>name</th>
-        		<td colspan="5">
-        			{{security.sctyName}}&nbsp;
+        		<th>代码</th>
+        		<td>{{ security.sctyID }}</td>
+        		<th>股票名称</th>
+        		<td colspan="2">&nbsp;{{security.sctyName}}</td>
+        		<td colspan="3">
         			<b-button size="sm" v-show="showBuyBtn" v-on:click="buy()" variant="success">Buy</b-button>
         		</td>
         	</tr>
@@ -41,6 +41,7 @@ export default {
 	data(){
 		return {
 			securityCode:'',
+
 			securityQuoteInfo: {},
 			security:{}
 		}
@@ -69,7 +70,10 @@ export default {
 				brokerID: 'MR'
 			});
 			socketManager.addResponseListener( (data) => {
-				this.securityQuoteInfo = data;
+
+				if(parseInt(data.SctyID, 10) === parseInt(this.security.sctyID)){
+					this.securityQuoteInfo = data;
+				}
 			});
 
 		},
@@ -81,16 +85,19 @@ export default {
 			// }
 			// let test2 = {...test1([1,2,3,4,5]), 0:'asdfasdf'};
 			// console.log(test2);
-			socketManager.subscribe({
-				mktCode: 'HK',
-				sctyID: securityCode
-			});
+
 			this.$store.dispatch('market/QUERY_SECURITY_STATIC_DATA', {
 				marketCode: 'HK',
 				securityCode: securityCode
 			}).then((data) => {
 				let res = this.$store.getters['market/GET_SECURITY']('HK', securityCode);
+				console.log(res)
 				this.security = res;
+
+				socketManager.subscribe({
+					mktCode: 'HK',
+					sctyID: securityCode
+				});
 			});
 		},
 		formatSecurityCode: function(value, event){
@@ -103,7 +110,7 @@ export default {
 		},
 		buy: function(){
 			let market = 'HK';
-			let sctyID = this.securityQuoteInfo.SctyID;
+			let sctyID = this.security.sctyID;
 			if(sctyID){
 				let url = [
 						'order',
@@ -119,5 +126,21 @@ export default {
 </script>
 
 <style lang='scss'>
-	
+.quoteTable {
+	line-height: 3em;
+	th {
+		font-weight:normal;
+		min-width: 4em;
+	}
+	td{
+		min-width: 5em;
+		text-align:left;
+	}
+}
+.red{
+	color:red;
+}
+.green{
+	color:green;
+}
 </style>

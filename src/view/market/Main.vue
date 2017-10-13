@@ -69,16 +69,7 @@
 </script>
 
 <style lang="scss">
-.quoteTable {
-	th {
-		font-weight:normal;
-		min-width: 4em;
-	}
-	td{
-		min-width: 5em;
-		text-align:left;
-	}
-}
+
 .red{
 	color:red;
 }
