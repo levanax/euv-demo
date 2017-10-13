@@ -1,6 +1,5 @@
 import Vue from 'vue';
 import Router from 'vue-router';
-import store from '@/store';
 
 const UserLogin = () => import('@/view/user/Login');
 const Main = () => import('@/view/market/Main');
@@ -34,7 +33,7 @@ let router = new Router({
 
 
 router.beforeEach((to, from, next) => {
-	let onlineLoginID = store.state.session.loginID;
+	let onlineLoginID = router.app.$store.state.session.loginID;
 	let online = onlineLoginID!==null?true:false;
 	switch(to.path){
 		case '/login':

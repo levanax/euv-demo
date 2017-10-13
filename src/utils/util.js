@@ -14,3 +14,12 @@ export const formatSecurityCode = function(marketCode, securityCode){
 	}
 	return result;
 }
+
+export const isEmpty = function(str){
+	return str === null || str.trim() === '';
+}
+
+
+export const isNotEmpty = function(str){
+	return !isEmpty(str);
+}
