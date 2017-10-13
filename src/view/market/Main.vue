@@ -20,39 +20,13 @@
 		  </tbody>
 		</table>
 
-		<div class="input-group">
-	      <input v-model="securityCode" @change="formatSecurityCode($event.target.value, $event)"  type="text" class="form-control" placeholder="" >
-	      <span class="input-group-btn">
-	        <button v-on:click="search()" class="btn btn-secondary" type="button">Search</button>
-	      </span>
-        </div>
-
-        <table class="quoteTable">
-        	<tr>
-        		<th>code</th>
-        		<td>{{securityQuoteInfo.SctyID}}</td>
-        		<th>name</th>
-        		<td colspan="5">
-        			{{security.sctyName}}&nbsp;
-        			<b-button size="sm" v-on:click="buy()" variant="success">Buy</b-button>
-        		</td>
-        	</tr>
-        	<tr>
-        		<th>现价</th>
-        		<td>{{securityQuoteInfo.Nom}}</td>
-        		<th>涨/跌幅</th>
-        		<td  v-bind:class='{red:securityQuoteInfo.Chg>0, green:securityQuoteInfo.Chg<0}'>{{securityQuoteInfo.Chg>0?'+'+securityQuoteInfo.Chg:securityQuoteInfo.Chg}}</td>
-        		<th>最高价</th>
-        		<td>{{securityQuoteInfo.Hi}}</td>
-        		<th>最低价</th>
-        		<td>{{securityQuoteInfo.Lo}}</td>
-        	</tr>
-        </table>
+        <Quote :showBuyBtn='true'></Quote>
     </div>
 </template>
 <script type="text/javascript">
 	import * as socketManager from '@/service/socketManager';
-	import { mapState, mapGetters } from 'vuex';
+
+	import Quote from '@/components/market/Quote.vue';
 
 	export default {
 		name:'mainView',
@@ -67,19 +41,13 @@
 		},
 		computed:{
 		},
-		components:{
-		},
+		components:{ Quote },
 		data(){
 			return {
 				securityCode:'',
 				indexs:[],
 				securityQuoteInfo: {},
 				security:{}
-			}
-		},
-		watch: {
-			securityCode(newVal, oldVal){
-				// console.debug('in securityCode()...', arguments);
 			}
 		},
 		methods: {
@@ -95,59 +63,6 @@
 					me.indexs = data.Index;
 				});
 				socketManager.subscribeIndex();
-
-
-				socketManager.addResponseListener(function(data){
-					// console.log(data);
-					me.securityQuoteInfo = data;
-				});
-
-			},
-			search: function() {
-				let securityCode = this.securityCode;
-				// this.$parent.$emit('test','this is msg.');
-				// let test1 = function(v){
-				// 	return v;
-				// }
-				// let test2 = {...test1([1,2,3,4,5]), 0:'asdfasdf'};
-				// console.log(test2);
-				socketManager.subscribe({
-					mktCode: 'HK',
-					sctyID: securityCode
-				});
-				this.$store.dispatch('market/QUERY_SECURITY_STATIC_DATA', {
-					marketCode: 'HK',
-					securityCode: securityCode
-				}).then((data) => {
-					let res = this.$store.getters['market/GET_SECURITY']('HK', securityCode);
-					this.security = res;
-				});
-			},
-			formatSecurityCode: function(value, event){
-				let securityCode = value.trim().replace(/[^0-9 ]/g, '');
-				if(securityCode!== '' && parseInt(securityCode, 10) >0){
-					let length = securityCode.length;
-					let str = '';
-					for(let i = 0 ,l = 5 - length; i < l ; i++){
-						str += '0';
-					}
-					this.securityCode = str + securityCode;
-				}else{
-					this.securityCode = '';
-				}
-			},
-			buy: function(){
-				let market = 'HK';
-				let sctyID = this.securityQuoteInfo.SctyID;
-				if(sctyID){
-					let url = [
-							'order',
-							market,
-							sctyID,
-							'buy'
-						].join('/');
-	          		this.$router.push(url);
-				}
 			}
 		}
 	}
