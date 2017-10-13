@@ -2,7 +2,7 @@
 	<div class="quoteComponent">
 
 		<div class="input-group">
-	      <input maxlength="5" v-model="securityCode" @change="formatSecurityCode($event.target.value, $event)"  type="text" class="form-control" placeholder="" >
+	      <input maxlength="5" onfocus="javascript:this.select();" v-model="securityCode" @change="formatSecurityCode($event.target.value, $event)"  type="text" class="form-control" placeholder="" >
 	      <span class="input-group-btn">
 	        <button v-on:click="search()" class="btn btn-secondary" type="button">Search</button>
 	      </span>
@@ -15,7 +15,7 @@
         		<th>股票名称</th>
         		<td colspan="2">&nbsp;{{security.sctyName}}</td>
         		<td colspan="3">
-        			<b-button size="sm" v-show="showBuyBtn" v-on:click="buy()" variant="success">Buy</b-button>
+        			<b-button size="sm" v-show="showBuyBtn && isNotEmpty(security.sctyID)" v-on:click="buy()" variant="success">Buy</b-button>
         		</td>
         	</tr>
         	<tr>
@@ -63,6 +63,7 @@ export default {
 		this.initCmp();
 	},
 	methods: {
+		isNotEmpty:isNotEmpty,
 		initCmp: function(){
 			var authorization = this.$store.state.session.authorization;
 			socketManager.install({
@@ -91,7 +92,6 @@ export default {
 				securityCode: securityCode
 			}).then((data) => {
 				let res = this.$store.getters['market/GET_SECURITY']('HK', securityCode);
-				console.log(res)
 				this.security = res;
 
 				socketManager.subscribe({

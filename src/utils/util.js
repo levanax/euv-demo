@@ -16,7 +16,7 @@ export const formatSecurityCode = function(marketCode, securityCode){
 }
 
 export const isEmpty = function(str){
-	return str === null || str.trim() === '';
+	return typeof str === 'undefined' ||str === null || str.trim() === '';
 }
 
 

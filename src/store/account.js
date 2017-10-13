@@ -4,15 +4,31 @@ import * as accountApi from '@/api/account.js';
 export default {
 	namespaced:true,
 	state: {
-  		accountList:[]
+  		accountList:[],
+  		accountProductLines: null
 	},
 	actions: {
 		'QUERY_ACCOUNT_LIST': async ({commit, state}, {loginID}) => {
-			await accountApi.queryAccountList(loginID).then(function(response) {
-			  let data = response.data;
-		      if(data.clientAccounts){
+			let response = await accountApi.queryAccountList(loginID);
+			let data = response.data;
+			if(!data.error && !data.sysCode){
 		      	commit('SET_ACCOUNT_LIST', {accountList: data.clientAccounts});
-		      }
+		      	return data.clientAccounts;
+		    }else{
+		    	throw new Error('account list get fail');
+		    }
+		},
+		'QUERY_ACCOUNT_PRODUCT_LINES': async ({commit, state}, {accNum}) => {
+			await accountApi.queryAccountProductLine(accNum).then((response) => {
+				let data = response.data;
+			    if(!data.error && !data.sysCode){
+			  	   commit('SET_ACCOUNT_PRODUCT_LINES',{
+				  	accountProductLines: data.productLines
+				   })
+				   return data.productLines;
+			    }else{
+			  	    throw new Error('data get fail');
+			    }
 			});
 		}
 	},
@@ -23,11 +39,15 @@ export default {
 				accountList[i]['desc'] = formatAccount(accountList[i]);
 			}
 			state.accountList = accountList;
+		},
+		'SET_ACCOUNT_PRODUCT_LINES': (state, {accountProductLines}) =>  {
+			state.accountProductLines = accountProductLines;
 		}
 	},
 	getters: {
-		'GET_ACCOUNT_LIST': (state, {marketCode, cucyCode}) => {
-			
+		'GET_ACCOUNT_LIST': (state) => (cucys) => {
+			let accountList = state.accountList;
+
 		}
 	}
 }

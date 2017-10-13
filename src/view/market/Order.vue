@@ -18,14 +18,23 @@
 				<div class="l-value">{{security.sctyName}}&nbsp;</div>
 			</div>
 
-			<br/>
 
-	      <b-form-group id="exampleInputGroup3"
-	                    label="帐户列表:" label-for="exampleInput3">
-	        <b-form-select @input="doAccNumChanged" id="exampleInput3"
+	      <b-form-group  label="帐户列表:" label-for="accNum">
+
+	        <b-form-select @input="doAccNumChanged" id="accNum"
 	                      :options="accountList" value-field="accNum" text-field="desc" required
 	                      v-model="form.accNum"
 	        ></b-form-select>
+
+	      </b-form-group>
+
+	      <b-form-group label="价格:" label-for="price">
+	        <b-form-input id='price' v-model="form.price" type="text" placeholder="Price"></b-form-input>
+	      </b-form-group>
+
+
+	      <b-form-group label="数量:" label-for="quantity">
+	        <b-form-input id='quantity' v-model="form.quantity" type="number" placeholder="quantity"></b-form-input>
 	      </b-form-group>
 
 
@@ -41,10 +50,10 @@
 		data(){
 	      return {
 	      	form: {
+	      		accNum: '',
+	      		price: ''
 		    },
-		    security: {
-
-		    }
+		    security: {}
 	      }
 	    },
 	    computed:{
@@ -55,30 +64,46 @@
 	    		return this.$store.state.account.accountList;
 	    	}
 	    },
+	    watch: {
+	    	form: function(val , a){
+	    		console.log(val, a);
+	    	}
+	    },
 	    created(){
 	    	// console.debug(this.$route.params);
 	        var loginID = this.$store.state.session.loginID;
 	    	this.$store.dispatch('account/QUERY_ACCOUNT_LIST', {loginID: loginID}).then(() => {
-	    		console.debug('get account list done.');
+	    		// console.debug('get account list done.');
+		    	
 	    	});
 	    	// this.$store.dispatch('market/QUERY_MARKET_CURRENCY');
-	    	this.loadMarketCurrency();
+	    	this.loadMarketCurrency().then((data) => {
+	    		// console.debug(data);
+	    	});
 	    	this.$store.dispatch('market/QUERY_SECURITY_STATIC_DATA', {
 					marketCode: 'HK',
 					securityCode: this.$route.params.sctyID
 				}).then((data) => {
 					this.security = data;
 				});
+			this.loadProductLines({langCode: 'en'}).then((data) => {
+				// console.debug(data);
+			})
 	    },
 		methods: {
 			...mapActions({
-				'loadMarketCurrency':'market/QUERY_MARKET_CURRENCY'
+				'loadMarketCurrency':'market/QUERY_MARKET_CURRENCY',
+				'loadProductLines':'market/QUERY_MARKET_PRODUCT_LINES',
+				'loadAccountProductLines':'account/QUERY_ACCOUNT_PRODUCT_LINES'
 			}),
 			onSubmit(evt) {
 	          evt.preventDefault();
 	          console.debug(JSON.stringify(this.form));
 	        },
 	        doAccNumChanged: function(value){
+	        	this.loadAccountProductLines({accNum: value}).then((data) => {
+					// console.debug(data);
+				})
 	        }
 		}
 	}
@@ -86,6 +111,8 @@
 <style lang='scss'>
 .l-form-row{
 	/*list-style: none;*/
+	line-height: 2.2em;
+
 	.l-label{
 		float: left;
 		width: 30%;

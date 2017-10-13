@@ -30,12 +30,6 @@
 
 	export default {
 		name:'mainView',
-		props:{
-			test: {
-				type: Boolean,
-				default: false
-			}
-		},
 		created(){
 			this.initView();
 		},
@@ -44,10 +38,8 @@
 		components:{ Quote },
 		data(){
 			return {
-				securityCode:'',
 				indexs:[],
 				securityQuoteInfo: {},
-				security:{}
 			}
 		},
 		methods: {

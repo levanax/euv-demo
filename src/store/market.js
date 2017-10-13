@@ -6,7 +6,8 @@ export default {
 	state: {
 		securityMap: new Map(), //es6
 		// key market, value: ['HKD']
-		marketCurrencyMap: new Map()
+		marketCurrencyMap: new Map(),
+		marketProuctLines: null
 	},
 	actions: {
 		'QUERY_SECURITY_STATIC_DATA': ({commit, state}, {marketCode, securityCode}) => {
@@ -23,13 +24,27 @@ export default {
 				});
 			});
 		},
-		'QUERY_MARKET_CURRENCY': ({commit, state}) => {
-			marketApi.queryMarketCurrency().then((response)=>{
-			  let data = response.data;
-			  if(!data.error && !data.sysCode){
-			  	commit('SET_MARKET_CURRENCY_MAP', {marketCurrencyList: data.mktCucy});
-			  }
-			});
+		'QUERY_MARKET_CURRENCY': async ({commit, state}) => {
+			let response = await marketApi.queryMarketCurrency();
+			let data = response.data;
+			if(!data.error && !data.sysCode){
+			    commit('SET_MARKET_CURRENCY_MAP', {marketCurrencyList: data.mktCucy});
+				return data.mktCucy;
+			}else{
+				throw new Error('market currency get fail');
+			}
+		},
+		'QUERY_MARKET_PRODUCT_LINES': async ({commit, state}, {langCode}) => {
+			let response = await marketApi.queryMarketProductLine(langCode);
+			let data = response.data;
+			if(!data.error && !data.sysCode){
+			  	commit('SET_MARKET_PRODUCT_LINES',{
+				  	marketProuctLines: data.productLines
+				})
+				return data.productLines;
+			}else{
+			  	throw new Error('data get fail');
+			}
 		}
 	},
 	mutations: {
@@ -44,6 +59,9 @@ export default {
 			for(let i = 0, length = marketCurrencyList.length; i < length; i++){
 				state.marketCurrencyMap.set(marketCurrencyList[i].mktCode, marketCurrencyList[i].mktCucy);
 			}
+		},
+		'SET_MARKET_PRODUCT_LINES': (state, {marketProuctLines}) => {
+			state.marketProuctLines = marketProuctLines;
 		}
 	},
 	getters: {

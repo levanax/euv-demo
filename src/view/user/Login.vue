@@ -1,7 +1,5 @@
 <template>
   <div class="loginView container">
-
-      <form class="form-signin">
         <h2 class="form-signin-heading">Please sign in</h2>
         <label for="inputEmail" class="sr-only">Login ID: </label>
         <input v-model="loginID"  type="text" id="inputEmail" class="form-control" placeholder="Email address" required autofocus>
@@ -13,9 +11,7 @@
           </label>
         </div>
         <button class="btn btn-lg btn-primary btn-block"  v-on:click="login()" type="submit">Sign in</button>
-      </form>
     </div>
-
 </template>
 
 <script>

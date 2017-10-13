@@ -29,3 +29,18 @@ export const queryMarketCurrency = function(){
 		params:{}
 	});
 }
+
+/**
+ * @param langCode {String}
+ */
+export const queryMarketProductLine = function(langCode){
+	let url = '/markets/productLines';
+	return axios.request({
+		url: url,
+		method: 'get',
+		baseURL: Config.server,
+		params:{
+			langCode: langCode
+		}
+	});
+}
