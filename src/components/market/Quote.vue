@@ -35,6 +35,7 @@
 <script type="text/javascript">
 import * as socketManager from '@/service/socketManager';
 import {isNotEmpty, formatSecurityCode} from '@/utils/util';
+import * as Const from '@/commons/Const';
 
 export default {
 	name: 'quoteComponent',
@@ -66,10 +67,21 @@ export default {
 		isNotEmpty:isNotEmpty,
 		initCmp: function(){
 			var authorization = this.$store.state.session.authorization;
-			socketManager.install({
+			let socket = socketManager.install({
 				authorization: authorization,
 				brokerID: 'MR'
 			});
+			if(!socket.connected){
+				this.$parent.$emit(Const.EMIT_EVENT.TOAST,Const.ALERT.INFO, 'quote报价服务器正在连接...');
+				socket.on('connect', () => {
+					this.$parent.$emit(Const.EMIT_EVENT.TOAST, Const.ALERT.INFO, 'quote报价服务器成功连接。');
+				});
+				socket.on('disconnect', () => {
+					this.$parent.$emit(Const.EMIT_EVENT.TOAST, Const.ALERT.DANGER, '报价服务器断开连接!');
+				});
+				socket.connect();
+			}
+
 			socketManager.addResponseListener( (data) => {
 
 				if(parseInt(data.SctyID, 10) === parseInt(this.security.sctyID)){

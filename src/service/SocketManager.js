@@ -19,7 +19,7 @@ let createSocketConnect = function(data) {
 			timeout: 2000,
 			reconnectionDelay: 100,
 			reconnectionDelayMax: 200,
-			autoConnect: true,
+			autoConnect: false,
 			multiplex: false,
 			query: [
 				'authorization=' + authorization,
@@ -30,17 +30,12 @@ let createSocketConnect = function(data) {
 			].join('&')
 		});
 
-		feedSocket.on('connect', function() {
-			console.debug('connected.');
-		});
-		feedSocket.on('disconnect', function() {
-			console.debug('disconnected');
-		});
-	}else{
-		if (!feedSocket.connected) {
-			feedSocket.connect();		
-		}
+		// feedSocket.on('connect', function() {
+		// });
+		// feedSocket.on('disconnect', function() {
+		// });
 	}
+	return feedSocket;
 }
 
 /**
@@ -101,7 +96,7 @@ let addIndexResponseListener = function(callback) {
 
 
 let install = function(data) {
-	createSocketConnect(data);
+	return createSocketConnect(data);
 }
 
 export {

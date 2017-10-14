@@ -25,6 +25,7 @@
 </template>
 <script type="text/javascript">
 	import * as socketManager from '@/service/socketManager';
+	import * as Const from '@/commons/Const';
 
 	import Quote from '@/components/market/Quote.vue';
 
@@ -46,10 +47,22 @@
 			initView: function(){
 				var me = this;
 				var authorization = this.$store.state.session.authorization;
-				socketManager.install({
+				let socket = socketManager.install({
 					authorization: authorization,
 					brokerID: 'MR'
 				});
+
+				if(!socket.connected){
+					this.$parent.$emit(Const.EMIT_EVENT.TOAST,Const.ALERT.INFO, '报价服务器正在连接...');
+					socket.on('connect', () => {
+						this.$parent.$emit(Const.EMIT_EVENT.TOAST, Const.ALERT.INFO, '报价服务器成功连接。');
+					});
+					socket.on('disconnect', () => {
+						this.$parent.$emit(Const.EMIT_EVENT.TOAST, Const.ALERT.DANGER, '报价服务器断开连接!');
+					});
+					socket.connect();
+				}
+
 				socketManager.addIndexResponseListener(function(data){
 					// console.log(data);
 					me.indexs = data.Index;
