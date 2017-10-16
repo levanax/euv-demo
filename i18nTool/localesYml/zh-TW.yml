@@ -1,0 +1,5 @@
+---
+zh-TW:
+    levan:
+        test: '"測試"文件'
+        readme: '我是{{name}}'

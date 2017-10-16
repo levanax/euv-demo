@@ -27,5 +27,12 @@ Example:
 node csv2locales.js --config config.json 
 
 
+转 CSV file：
+1) save as csv file (default encoding: Tools --> web options --> Encoding --> select default encoding. )
+    popup tips. click close(X).
+    close excel application.
+2) open csv file with notepad, save as --> change encoding:UTF-8 -> OK.
+
+
 
 

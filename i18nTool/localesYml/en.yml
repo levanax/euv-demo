@@ -1,0 +1,5 @@
+---
+en:
+    levan:
+        test: 'this is "test"'
+        readme: 'I am {{name}}'

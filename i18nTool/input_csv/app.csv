@@ -1,0 +1,4 @@
+﻿key,en,zh-CN,zh-TW
+,,,
+levan.test,"this is ""test""","""测试""文件","""測試""文件"
+levan.readme,I am {{name}},我是{{name}},我是{{name}}
