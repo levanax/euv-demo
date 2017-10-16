@@ -1,0 +1,388 @@
+---
+ru-RU:
+    common:
+        choose: Выберите…
+    filter:
+        is: явл.
+        is_not: 'не явл.'
+        filters: Фильтры
+        add: 'Добавить фильтр...'
+    options:
+        legend: Опции
+        as_map: 'Показать как карту'
+        dual_y: 'Две оси'
+        show95: 'Показать 95/5'
+    date:
+        for: 'За:'
+        last60m: 'Последние 60 минут'
+        last24h: 'Последние  24 часа'
+        last7d: 'Последние 7 дней'
+        last30d: 'Последние  30 дней'
+        last12m: 'Последние  12 месяцев'
+        today: Сегодня
+        this_w: 'Текущую неделю'
+        this_m: 'Текущий месяц'
+        this_y: 'Текущий год'
+        yesterday: Вчера
+        last_w: 'Прошлую неделю'
+        last_m: 'Прошлый месяц'
+        last_y: 'Прошлый год'
+        from: 'От:'
+        to: 'По:'
+        month:
+            jan: Январь
+            feb: Февраль
+            mar: Март
+            apr: Апрель
+            may: Май
+            jun: Июнь
+            jul: Июль
+            aug: Август
+            sep: Сентябрь
+            oct: Октябрь
+            nov: Ноябрь
+            dec: Декабрь
+        month_short:
+            jan: Янв
+            feb: Фев
+            mar: Мар
+            apr: Апр
+            may: Май
+            jun: Июн
+            jul: Июл
+            aug: Авг
+            sep: Сен
+            oct: Окт
+            nov: Ноя
+            dec: Дек
+        week:
+            su: Воскресенье
+            mo: Понедельник
+            tu: Вторник
+            we: Среда
+            th: Четверг
+            fr: Пятница
+            sa: Суббота
+        week_short:
+            su: Вос
+            mo: Пон
+            tu: Вто
+            we: Сре
+            th: Чет
+            fr: Пят
+            sa: Суб
+        week_min:
+            su: Во
+            mo: По
+            tu: Вт
+            we: Ср
+            th: Че
+            fr: Пя
+            sa: Су
+    table:
+        total: 'Общее количество:'
+        na: Н/Д
+        sLengthMenu: 'Показать _MENU_ записей'
+        sInfo: 'Записи с _START_ до _END_ из _TOTAL_'
+        sSearch: 'Поиск:'
+        oPaginate:
+            sPrevious: Пред
+            sNext: След
+    measure:
+        measure: Измерить
+        by: К
+        time: Время
+        interval: За
+        add: 'Добавить параментр измерения'
+    lens:
+        lens: Выделить
+        none: 'Не выделять'
+        top5: 'Топ 5'
+        bottom5: 'Заключительные 5'
+        value: Значение
+        percent: Процент
+        include: 'Включить остальные'
+        matches: совпадения
+    result_size:
+        show: Отобразить
+        top: Топ
+        bottom: Заключительные
+        by: за
+    report:
+        controls: Управление
+        visual: Визуализация
+        table: Таблица
+        link: 'Постоянная ссылка'
+        use_url: 'Используйте данный URL, чтобы поделиться данным отчетом'
+        cancel: Отмена
+        select: Выбрать
+        new: 'Новый отчет'
+        create_new_button: 'Создать новый отчет'
+    customer:
+        select: 'Пожалуйста, выберите клиента'
+        single: 'При текущих настройках отчета, у вас есть возможность фильтровать только по одному клиенту.'
+        pick_one: 'Пожалуйста, выберите только одного клиента для фильтрации данных'
+    breakout:
+        show: Отобразить
+        by: по
+    LoginForm:
+        'Please sign in': 'Пожалуйста, введите своё имя пользователя и пароль.'
+        Username: 'Имя пользователя'
+        Password: Пароль
+        Login: Войти
+    error:
+        general_message: 'Произошла ошибка. Пожалуйста, обратитесь к администратору.'
+        continue_button: Продолжить
+        wrong_user_credentials: 'Ошибка аутентификации пользователей. Пожалуйста, проверьте введенное имя пользователя и пароль.'
+        authentication_system_error: 'Во время аутентификации произошла ошибка.'
+        data_to_large_csv: 'Запрашиваемые вами данные имеют слишком большой размер и не могут быть отображены в используемом вами браузере. Если вы продолжите, то увидите лишь часть данных, но у вас есть возможность скачать весь пакет данных в файл с расширением .xlsx или .csv.'
+        data_to_large: 'Запрашиваемые вами данные имеют слишком большой размер и не могут быть отображены в используемом вами браузере. Если вы продолжите, то увидите лишь часть данных.'
+        btn:
+            full_data: 'Загрузить все данные (будет показана только часть)'
+            reduce_data: 'Ограничить данные'
+            ok: Да
+    application_title: 'CDN Analytics'
+    application_tagline: 'Пособие по Сети доставки контента'
+    application_copyright: 'Copyright © Skytide, Inc.'
+    header:
+        logged_in_as: 'Вы вошли как:'
+        logout_link: Выйти
+    reg:
+        Aruba: Аруба
+        Afghanistan: Афганистан
+        Angola: Ангола
+        Anguilla: Ангилья
+        Albania: Албания
+        Andorra: Андорра
+        'United Arab Emirates': 'Объединенные Арабские Эмираты'
+        Argentina: Аргентина
+        Armenia: Армения
+        'American Samoa': 'Американское Самоа'
+        Antarctica: Антарктида
+        Australia: Австралия
+        'Fr S and Antarctic Lands': 'Французские Южные и Антарктические земли'
+        'Antigua and Barb': 'Антигуа и Барбуда'
+        Austria: Австрия
+        Azerbaijan: Азербайджан
+        Burundi: Бурунди
+        Belgium: Бельгия
+        Benin: Бенин
+        'Burkina Faso': Буркина-Фасо
+        Bangladesh: Бангладеш
+        Bulgaria: Болгария
+        Bahrain: Бахрейн
+        Bahamas: 'Багамские острова'
+        'Bosnia and Herz': 'Босния и Герцеговина'
+        'St Barthelemy': Сен-Бартелеми
+        Belarus: Беларусь
+        Belize: Белиз
+        Bermuda: 'Бермудские острова'
+        Bolivia: Боливия
+        Brazil: Бразилия
+        Barbados: Барбадос
+        Brunei: Бруней
+        Bhutan: Бутан
+        Botswana: Ботсвана
+        'Central African Rep': 'Центрально-Африканская Республика'
+        Canada: Канада
+        Switzerland: Швейцария
+        Chile: Чили
+        China: Китай
+        'Ivory Coast': 'берег Слоновой Кости'
+        Cameroon: Камерун
+        'Congo (Kinshasa)': 'Конго (Киншаса)'
+        'Congo (Brazzaville)': 'Конго (Браззавиль)'
+        'Cook Is': 'Острова Кука'
+        Colombia: Колумбия
+        Comoros: 'Коморские острова'
+        'Cape Verde': Кабо-Верде
+        'Costa Rica': Коста-Рика
+        Cuba: Куба
+        Curaçao: Кюрасао
+        'Cayman Is': 'Каймановы острова'
+        Cyprus: Кипр
+        'Czech Rep': Чехия
+        Germany: Германия
+        Djibouti: Джибути
+        Dominica: Доминика
+        Denmark: Дания
+        'Dominican Rep': 'Доминиканская Республика'
+        Algeria: Алжир
+        Ecuador: Эквадор
+        Egypt: Египет
+        Eritrea: Эритрея
+        Spain: Испания
+        Estonia: Эстония
+        Ethiopia: Эфиопия
+        Finland: Финляндия
+        Fiji: Фиджи
+        'Falkland Is': 'Фолклендские острова'
+        France: Франция
+        Guadeloupe: Гваделупа
+        Martinique: Мартиника
+        'French Guiana': 'Французская Гвиана'
+        Reunion: Реюньон
+        Mayotte: Майотта
+        'Faroe Is': 'Фарерские острова'
+        Micronesia: Микронезия
+        Gabon: Габон
+        'West Bank': 'Западный берег реки Иордан'
+        'United Kingdom': Великобритания
+        Georgia: Грузия
+        Guernsey: Гернси
+        Ghana: Гана
+        Guinea: Гвинея
+        Gambia: Гамбия
+        'Guinea Bissau': Гвинея-Бисау
+        'Eq Guinea': 'Экваториальная Гвинея'
+        Greece: Греция
+        Grenada: Гренада
+        Greenland: Гренландия
+        Guatemala: Гватемала
+        Guam: Гуам
+        Guyana: Гайана
+        'Hong Kong': Гонконг
+        'Heard I and McDonald Is': 'Остров Херд и острова Макдональд'
+        Honduras: Гондурас
+        Croatia: Хорватия
+        Haiti: 'Республика Гаити'
+        Hungary: Венгрия
+        Indonesia: Индонезия
+        'Isle of Man': 'Остров Мэн'
+        India: Индия
+        'Br Indian Ocean Ter': 'Британская территория в Индийском океане'
+        Ireland: Ирландия
+        Iran: Иран
+        Iraq: Ирак
+        Iceland: Исландия
+        Israel: Израиль
+        Italy: Италия
+        Jamaica: Ямайка
+        Jersey: Джерси
+        Jordan: Иордания
+        Japan: Япония
+        Kazakhstan: Казахстан
+        Kenya: Кения
+        Kyrgyzstan: Киргизия
+        Cambodia: Камбоджа
+        Kiribati: Кирибати
+        'St Kitts and Nevis': 'Сент-Китс и Невис'
+        'S Korea': 'Республика Корея'
+        Kuwait: Кувейт
+        Laos: Лаос
+        Lebanon: Ливан
+        Liberia: Либерия
+        Libya: Ливия
+        'Saint Lucia': Сент-Люсия
+        Liechtenstein: Лихтенштейн
+        'Sri Lanka': Шри-Ланка
+        Lesotho: Лесото
+        Lithuania: Литва
+        Luxembourg: Люксембург
+        Latvia: Латвия
+        Macau: Макао
+        'St Martin': Сен-Мартен
+        Morocco: Марокко
+        Monaco: Монако
+        Moldova: Молдавия
+        Madagascar: Мадагаскар
+        Maldives: Мальдивы
+        Mexico: Мексика
+        'Marshall Is': 'Маршалловы Острова'
+        Macedonia: 'Республика Македония'
+        Mali: Мали
+        Malta: Мальта
+        Myanmar: Мьянма
+        Montenegro: Черногория
+        Mongolia: Монголия
+        'N Mariana Is': 'Северные Марианские острова'
+        Mozambique: Мозамбик
+        Mauritania: Мавритания
+        Montserrat: Монтсеррат
+        Mauritius: Маврикий
+        Malawi: Малави
+        Malaysia: Малайзия
+        Namibia: Намибия
+        'New Caledonia': 'Новая Каледония'
+        Niger: Нигер
+        'Norfolk Island': Норфолк
+        Nigeria: Нигерия
+        Nicaragua: Никарагуа
+        Niue: Ниуэ
+        Netherlands: Нидерланды
+        Norway: Норвегия
+        Nepal: Непал
+        Nauru: Науру
+        'New Zealand': 'Новая Зеландия'
+        Oman: Оман
+        Pakistan: Пакистан
+        Panama: Панама
+        'Pitcairn Is': 'Острова Питкэрн'
+        Peru: Перу
+        Philippines: Филиппины
+        Palau: Палау
+        'Papua New Guinea': 'Папуа — Новая Гвинея'
+        Poland: Польша
+        'Puerto Rico': Пуэрто-Рико
+        'N Korea': 'Корейская Народно-Демократическая Республика'
+        Portugal: Португалия
+        Paraguay: Парагвай
+        'Fr Polynesia': 'Французская Полинезия'
+        Qatar: Катар
+        Romania: Румыния
+        Russia: Россия
+        Rwanda: Руанда
+        'Saudi Arabia': 'Саудовская Аравия'
+        Sudan: Судан
+        'S Sudan': 'Южный Судан'
+        Senegal: Сенегал
+        Singapore: Сингапур
+        'S Geo and S Sandw Is': 'Южная Георгия и Южные Сандвичевы острова'
+        'Saint Helena': 'Остров Святой Елены'
+        'Solomon Is': 'Соломоновы Острова'
+        'Sierra Leone': Сьерра-Леоне
+        'El Salvador': Сальвадор
+        'San Marino': Сан-Марино
+        Somalia: Сомали
+        'St Pierre and Miquelon': 'Сен-Пьер и Микелон'
+        Serbia: Сербия
+        'Sao Tome and Principe': 'Сан-Томе и Принсипи'
+        Suriname: Суринам
+        Slovakia: Словакия
+        Slovenia: Словения
+        Sweden: Швеция
+        Swaziland: Свазиленд
+        'Sint Maarten': Синт-Мартен
+        Seychelles: 'Сейшельские Острова'
+        Syria: Сирия
+        'Turks and Caicos Is': 'Тёркс и Кайкос'
+        Chad: Чад
+        Togo: Того
+        Thailand: Таиланд
+        Tajikistan: Таджикистан
+        Turkmenistan: Туркмения
+        'East Timor': 'Восточный Тимор'
+        Tonga: Тонга
+        'Trinidad and Tobago': 'Тринидад и Тобаго'
+        Tunisia: Тунис
+        Turkey: Турция
+        Taiwan: Тайвань
+        Tanzania: Танзания
+        Uganda: Уганда
+        Ukraine: Украина
+        Uruguay: Уругвай
+        'United States': 'Соединенные Штаты'
+        Uzbekistan: Узбекистан
+        Vatican: Ватикан
+        'St Vin and Gren': 'Сент-Винсент и Гренадины'
+        Venezuela: Венесуэла
+        'British Virgin Is': 'Британские Виргинские острова'
+        'US Virgin Is': 'Американские Виргинские острова'
+        Vietnam: Вьетнам
+        Vanuatu: Вануату
+        'Wallis and Futuna': 'Уоллис и Футуна'
+        Samoa: Самоа
+        Yemen: Йемен
+        'South Africa': 'Южно-Африканская Республика'
+        Zambia: Замбия
+        Zimbabwe: Зимбабве
