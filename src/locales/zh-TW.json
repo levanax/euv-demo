@@ -1,0 +1,17 @@
+{
+ "levan": {
+  "readme": "我是{{name}}",
+  "test": "\"測試\"文件"
+ },
+ "loginView": {
+  "button": {
+   "signIn": "登入"
+  },
+  "desc": {
+   "loginID": "登入名",
+   "password": "密碼",
+   "plzSignIn": "請登入帳戶",
+   "rememberMe": "記住我"
+  }
+ }
+}

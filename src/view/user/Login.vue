@@ -1,16 +1,16 @@
 <template>
   <div class="loginView container">
-        <h2 class="form-signin-heading">Please sign in</h2>
-        <label for="inputEmail" class="sr-only">Login ID: </label>
+        <h2 class="form-signin-heading">{{$t('loginView.desc.plzSignIn')}}</h2>
+        <label for="inputEmail" class="sr-only">{{ $t('loginView.desc.loginID')}} : </label>
         <input v-model="loginID"  type="text" id="inputEmail" class="form-control" placeholder="Email address" required autofocus>
-        <label for="inputPassword" class="sr-only">Password</label>
+        <label for="inputPassword" class="sr-only">{{ $t('loginView.desc.password')}}</label>
         <input v-model="password"  type="password" id="inputPassword" class="form-control" placeholder="Password" required>
         <div class="checkbox">
           <label>
-            <input type="checkbox" value="remember-me"> Remember me
+            <input type="checkbox" value="remember-me"> {{$t('loginView.desc.rememberMe')}}
           </label>
         </div>
-        <button class="btn btn-lg btn-primary btn-block"  v-on:click="login()" type="submit">Sign in</button>
+        <button class="btn btn-lg btn-primary btn-block"  v-on:click="login()" type="submit">{{ $t('loginView.button.signIn')}}</button>
     </div>
 </template>
 

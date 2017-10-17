@@ -1,5 +1,13 @@
 ---
 en:
     levan:
-        test: 'this is "test"'
         readme: 'I am {{name}}'
+        test: 'this is "test"'
+    loginView:
+        button:
+            signIn: 'Sign in'
+        desc:
+            loginID: 'login ID'
+            password: Password
+            plzSignIn: 'Please sign in'
+            rememberMe: 'Remember me'

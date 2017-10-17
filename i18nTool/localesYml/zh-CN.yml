@@ -1,5 +1,13 @@
 ---
 zh-CN:
     levan:
-        test: '"测试"文件'
         readme: '我是{{name}}'
+        test: '"测试"文件'
+    loginView:
+        button:
+            signIn: 登入
+        desc:
+            loginID: 登入名
+            password: 密码
+            plzSignIn: 请登入帐户
+            rememberMe: 记住我
