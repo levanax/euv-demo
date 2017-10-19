@@ -18,7 +18,7 @@
 				<div class="l-value">{{security.sctyName}}&nbsp;</div>
 			</div>
 
-
+		<div>
 	      <b-form-group  label="帐户列表:" label-for="accNum">
 
 	        <b-form-select @input="doAccNumChanged" id="accNum"
@@ -34,12 +34,13 @@
 
 
 	      <b-form-group label="数量:" label-for="quantity">
-	        <b-form-input id='quantity' v-model="form.quantity" type="number" placeholder="quantity"></b-form-input>
+	        <b-form-input id='quantity' v-model="form.quantity" type="text" placeholder="quantity"></b-form-input>
 	      </b-form-group>
 
 
 	      <b-button type="submit" variant="primary">Submit</b-button>
 	      <b-button type="reset" variant="secondary">Reset</b-button>
+	    </div>
 	    </b-form>
 	</div>
 </template>
@@ -49,6 +50,7 @@
 		name: 'orderView',
 		data(){
 	      return {
+	      	selected:null,
 	      	form: {
 	      		accNum: '',
 	      		price: ''
@@ -110,18 +112,16 @@
 </script>
 <style lang='scss'>
 .l-form-row{
-	/*list-style: none;*/
+	display: -webkit-box;
 	line-height: 2.2em;
 
 	.l-label{
-		float: left;
-		width: 30%;
+		-webkit-box-flex:1;
 		overflow: hidden;
 	}
 	.l-value{
-		float: left;
+		-webkit-box-flex:1;
 		overflow: hidden;
-		width: 70%;
 	}
 }
 </style>
