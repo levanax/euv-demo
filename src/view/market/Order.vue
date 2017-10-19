@@ -66,6 +66,9 @@
 	    		return this.$store.state.account.accountList;
 	    	}
 	    },
+	    components:[
+	    	'bButton'
+	    ],
 	    watch: {
 	    	form: function(val , a){
 	    		console.log(val, a);

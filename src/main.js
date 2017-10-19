@@ -26,6 +26,18 @@ Vue.config.errorHandler = function (err, vm, info) {
 	console.error(err);
 }
 
+
+/* ---------------bootstrap vue bug .---------------- */
+//https://github.com/bootstrap-vue/bootstrap-vue/issues/1201
+let originalVueComponent = Vue.component
+Vue.component = function(name, definition) {
+  if (name === 'bFormCheckboxGroup' || name === 'bCheckboxGroup' ||
+      name === 'bCheckGroup' || name === 'bFormRadioGroup') {
+    definition.components = {bFormCheckbox: definition.components[0]}
+  }
+  originalVueComponent.apply(this, [name, definition])
+}
+/* -------------bootstrap vue bug end.------------------- */
 Vue.use(BootstrapVue);
 
 
