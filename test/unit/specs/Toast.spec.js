@@ -9,6 +9,9 @@ describe('Toast.vue', () => {
     	variant: 'info',
     	message: 'test msg.'
     };
-    const vm = new Constructor({ propsData: propsData }).$mount()
+    const vm = new Constructor({ propsData: propsData }).$mount();
+
+    let toastCmp = vm.$el.querySelector('.toastCmp');
+    console.debug(toastCmp)
   })
 })

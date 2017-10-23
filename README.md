@@ -1,9 +1,9 @@
 https://github.com/mzabriskie/axios
 - cnpm install axios --save
 
-https://bootstrap-vue.js.org/docs/
-- -cnpm install jquery --save
-- -cnpm install popper.js --dev--save
+https://bootstrap-vue.js.org/docs/  
+- cnpm install jquery --save
+- cnpm install popper.js --dev--save
 - cnpm i bootstrap-vue --save
 
 https://github.com/socketio/socket.io-client

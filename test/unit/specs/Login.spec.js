@@ -1,15 +1,3 @@
-
-- TypeError: csv is not a function:  
-https://stackoverflow.com/questions/23898410/typeerror-object-is-not-a-function-when-using-csv-module
-
-
----
-> $npm run unit bug   
-抛出以下错误，导致无法正常运行
-> '[Vue warn]: Error in render: "TypeError: undefined is not an object (evaluating 'this.$i18n.i18next')"  (found in <Root>)'
-解：https://github.com/vuejs-templates/webpack/issues/709
-
-```
 import Vue from 'vue'
 import UserLogin from '@/view/user/Login'
 import  i18n from '@/plugins/i18next'
@@ -17,8 +5,10 @@ import  i18n from '@/plugins/i18next'
 describe('UserLogin.vue', () => {
   it('should can login success', () => {
     const Constructor = Vue.extend(UserLogin);
-    //引入构造方法内部
     const userLoginView = new Constructor({i18n}).$mount();
+
+    userLoginView.loginID = '2trade140';
+    userLoginView.password = '12345678';
     const LoginBtn = userLoginView.$el.querySelector('h2');
 
     const clickEvent = new window.Event('click');
@@ -26,5 +16,3 @@ describe('UserLogin.vue', () => {
     userLoginView._watcher.run();
   })
 })
-```
----
