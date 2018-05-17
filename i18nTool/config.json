@@ -1,5 +1,0 @@
-{
-	"inputCsvDirectory" : "input_csv",
-	"outputJsonDirectory" : "../src/locales",
-	"outputYmlDirectory" : "./localesYml"
-}

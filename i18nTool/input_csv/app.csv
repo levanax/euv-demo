@@ -1,9 +1,0 @@
-﻿key,en,zh-CN,zh-TW
-,,,
-levan.readme,I am {{name}},我是{{name}},我是{{name}}
-levan.test,"this is ""test""","""测试""文件","""測試""文件"
-loginView.button.signIn,Sign in,登入,登入
-loginView.desc.loginID,login ID,登入名,登入名
-loginView.desc.password,Password,密码,密碼
-loginView.desc.plzSignIn,Please sign in,请登入帐户,請登入帳戶
-loginView.desc.rememberMe,Remember me,记住我,記住我
