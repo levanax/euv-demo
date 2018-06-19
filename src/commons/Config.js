@@ -1,8 +1,8 @@
 "use strict";
 
 const Config = Object.freeze({
-	server: 'https://gotrade_uat_48.2go-app.com:13002',
-	psgServer:'https://gotrade_uat_48.2go-app.com:14000',
+	server: 'http://192.168.7.127:3000',
+	psgServer:'http://192.168.7.127:3000',
 	appkey: 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOiJHb1RyYWRlIiwidHlwZSI6IkludGVybmFsIiwiYXBwSWQiOiJHb01vYmlsZSIsImFsbG93U2VydmljZSI6WyJDRyIsIlBTRyJdLCJleHBpcmVzSW4iOiIyMDUwMTIzMSJ9.IJjUqqofGgjd7qNG0PCAnX8K7xBTwGoGAyxXbLcMDt8',
 	appPwd: 'abcd1234'
 });

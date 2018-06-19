@@ -22,8 +22,8 @@ export default {
   name: 'loginView',
   data() {
     return {
-    loginID:'2trade140',
-    password:'12345678'
+    loginID:'2trade141',
+    password:'ZZZzzz222'
     }
   },
   created(){
@@ -65,7 +65,20 @@ export default {
 
             this.$router.push('main');
            }else{
-            console.warn('user or password error.');
+             if(data.error && data.error.code === 'E0008'){
+               var authorization = response.headers.authorization;
+               this.$store.commit('session/SET_USER_CACHE', {loginID:loginID, authorization:authorization});
+
+               axios.defaults.headers.common['BrokerID'] = 'MR';
+               axios.defaults.headers.common['uuid'] = 'uuid';
+               axios.defaults.headers.common['Appkey'] = Config.appkey;
+               axios.defaults.headers.common['AppPwd'] = Config.appPwd;
+               axios.defaults.headers.common['authorization'] = authorization;
+                              
+               this.$router.push('verify');
+             }else{
+              console.warn('user or password error.');
+             }
            }
        });
     }

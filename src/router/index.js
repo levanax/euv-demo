@@ -3,6 +3,7 @@ import Router from 'vue-router';
 import store from '@/store';
 
 const UserLogin = () => import('@/view/user/Login');
+const verifyView = () =>  import('@/view/2fa/verify');
 const Main = () => import('@/view/market/Main');
 const Order = () => import('@/view/market/Order');
 
@@ -18,6 +19,10 @@ let router = new Router({
 		path: '/login',
 		name: 'login',
 		component: UserLogin
+	},{
+		path: '/verify',
+		name: 'verify',
+		component: verifyView
 	},{
 		path: '/main',
 		name: 'main',
