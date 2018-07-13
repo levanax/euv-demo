@@ -14,8 +14,6 @@ import BootstrapVue from 'bootstrap-vue'
 import 'bootstrap/dist/css/bootstrap.css'
 import 'bootstrap-vue/dist/bootstrap-vue.css'
 
-import ElementUI from 'element-ui';
-import 'element-ui/lib/theme-chalk/index.css';
 
 
 Object.keys(filters).forEach(key => {
@@ -42,7 +40,6 @@ Vue.component = function(name, definition) {
 }
 /* -------------bootstrap vue bug end.------------------- */
 Vue.use(BootstrapVue);
-Vue.use(ElementUI);
 
 
 axiosManager.initInterceptor();
